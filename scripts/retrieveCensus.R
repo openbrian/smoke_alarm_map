@@ -6,7 +6,7 @@
 library(censusapi)
 library(dplyr)
 library(readr)
-censuskey <- read_file("/Users/Hannah/Documents/keys/censuskey.txt")
+#censuskey <- read_file("/Users/Hannah/Documents/keys/censuskey.txt")
 
 acs_2014_api <- 'http://api.census.gov/data/2014/acs5'
 # vars2014 <- listCensusMetadada(acs_2014_api, "v")
@@ -23,7 +23,8 @@ formatCensus <- function(df) {
 }
 
 # Counties
-acscounties <- getCensus(acs_2014_api, key=censuskey, vars=vars, region="county:*")
+#acscounties <- getCensus(acs_2014_api, key=censuskey, vars=vars, region="county:*")
+acscounties <- getCensus(name='acs5', vintage='2014', vars=vars, region="county:*")
 acscounties <- formatCensus(acscounties)
 acscounties <- acscounties %>% mutate(fips_county = paste(state, county, sep="")) %>%
 	select(-state, -county)
@@ -33,15 +34,18 @@ write.csv(acscounties, "data/acscounties.csv", na="", row.names = F)
 acstracts <- NULL
 # Have to get tract data for each state separately with API
 for (s in fips) {
-	regionget <- paste("tract:*&in=state:", s, sep="")
-	temp <- getCensus(acs_2014_api, key=censuskey, vars=vars, region=regionget)
+#	regionget <- paste("tract:*&in=state:", s, sep="")
+	regionget <- paste("state:", s, sep="")
+#	temp <- getCensus(acs_2014_api, key=censuskey, vars=vars, region=regionget)
+#	temp <- getCensus(acs_2014_api, vars=vars, region=regionget)
+	temp <- getCensus(name='acs5', vintage='2014', vars=vars, region="tract:*", regionin=regionget)
 	acstracts <- rbind(acstracts, temp)
 }
 acstracts <- formatCensus(acstracts)
 # Tract full fips codes
 acstracts <- acstracts %>% mutate(fips_tract=paste(state, county, tract, sep="")) %>%
 	select(-state, -county, -tract) %>%
-	select(fips_tract, everything()) %>% 
+	select(fips_tract, everything()) %>%
 	mutate(name_tract = gsub("^(.*?),.*", "\\1", acstracts$NAME))
 
 write.csv(acstracts, "data/acstracts.csv", na="", row.names = F)

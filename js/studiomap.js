@@ -5,7 +5,8 @@ var REGIONS = ['east', 'south', 'midwest', 'west']; //regions to add - saved in 
 //URLS of regional datasets
 var URLS = ['datakinddc.04hkadfo', 'datakinddc.2b90vyhy', 'datakinddc.b0ujw98l', 'datakinddc.cao4jei0'];
 var COLORS = ["#fef0d9", "#fdd49e", "#fdbb84", "#fc8d59", "#e34a33", "#b30000"];
-mapboxgl.accessToken = 'pk.eyJ1IjoiZGF0YWtpbmRkYyIsImEiOiJjaWppcmZtMHcwMnZ2dHlsdDlzenN0MnRqIn0.FsB8WZ_HKhb3mPa1MPXxdw';
+//mapboxgl.accessToken = 'pk.eyJ1IjoiZGF0YWtpbmRkYyIsImEiOiJjaWppcmZtMHcwMnZ2dHlsdDlzenN0MnRqIn0.FsB8WZ_HKhb3mPa1MPXxdw';
+mapboxgl.accessToken = 'pk.eyJ1Ijoib3BlbmJyaWFuIiwiYSI6ImNqanJwcGRxYTJrcnczcG1wb3NweDRwbjcifQ.Fh1ngCM2_m2IDuz5S8Ln8A';
 
 //buttons for riskiest tract views
 var topOpts = ["All", 10, 25, 50, 100, 200];

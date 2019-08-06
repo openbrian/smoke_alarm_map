@@ -21,7 +21,7 @@ if [ ! -d shapefiles/cb_2014_us_county_500k/ ]; then
   mkdir shapefiles/cb_2014_us_county_500k/
 fi
 echo downloading counties
-curl -o shapefiles/cb_2014_us_county_500k.zip http://www2.census.gov/geo/tiger/GENZ2014/shp/cb_2014_us_county_500k.zip
+curl -o shapefiles/cb_2014_us_county_500k.zip https://www2.census.gov/geo/tiger/GENZ2014/shp/cb_2014_us_county_500k.zip
 unzip shapefiles/cb_2014_us_county_500k.zip -d shapefiles/cb_2014_us_county_500k/
 
 # Census tract boundaries for main map layers
